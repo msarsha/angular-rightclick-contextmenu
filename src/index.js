@@ -3,6 +3,7 @@
     var module = angular.module('sarsha.rightclick', []);
 
     module.directive('shRightClick', shRightClick);
+    module.directive('mouseMove', mouseMove);
 
     function shRightClick() {
         return function ($scope, $element, $attrs) {
@@ -27,9 +28,9 @@
 
             function destroy() {
                 elm.removeChild(menuElement);
+                elm.classList.remove("menu-open");
                 menuElement = null;
                 document.body.removeEventListener("mousedown", bodyClickHandler);
-                // delete document.body.onmousedown;
             }
 
             function clickHandler(evt) {
@@ -47,11 +48,12 @@
                     return;
                 }
 
-                if (elm.style.position === "static")
+                if (elm.style.position === "static" || elm.style.position == "")
                     elm.style.position = "relative";
 
                 setMenuPosition(x, y);
                 elm.appendChild(menuElement);
+                elm.classList.add ("menu-open");
             }
 
             function setMenuPosition(x, y) {
@@ -62,7 +64,6 @@
     }
 
 
-    module.directive('mouseMove', mouseMove);
 
     function mouseMove() {
         return {

@@ -1,3 +1,7 @@
+body,html{
+    height: 100%;
+}
+
 .mydDiv{
     height: 100px;
     width: 100px;
@@ -5,7 +9,6 @@
     border: 1px solid black;
     margin-top: 50px;
     margin-left: 100px;
-    position: absolute;
 }
 
 .menu{
@@ -17,6 +20,6 @@
     box-shadow: -5px 8px 8px -4px lightgray;
 }
 
-.menu-off{
-    display: none;
+.menu-open{
+    border: 0.5px solid rgba(50, 150, 200, 0.3);
 }
