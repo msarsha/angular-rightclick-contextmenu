@@ -5,45 +5,58 @@
     module.directive('shRightClick', shRightClick);
 
     function shRightClick() {
-        return {
-            replace: true,
-            link: function ($scope, $element, $attrs) {
-                var elm = $element[0];
-                var menuElement = null;
+        return function ($scope, $element, $attrs) {
+            var elm = $element[0];
+            var menuElement = null;
 
-                elm.addEventListener("contextmenu", clickHandler);
+            elm.addEventListener("contextmenu", clickHandler);
 
-                function createMenuElement() {
-                    menuElement = document.createElement("div");
-                    menuElement.classList.add('menu');
+            function createMenuElement() {
+                menuElement = document.createElement("div");
+                menuElement.classList.add('menu');
+            }
+
+            function bindBodyClick() {
+                document.body.addEventListener("mousedown", bodyClickHandler);
+            }
+
+            function bodyClickHandler(e) {
+                if (e.button !== 2 && menuElement)
+                    destroy();
+            };
+
+            function destroy() {
+                elm.removeChild(menuElement);
+                menuElement = null;
+                document.body.removeEventListener("mousedown", bodyClickHandler);
+                // delete document.body.onmousedown;
+            }
+
+            function clickHandler(evt) {
+                evt.preventDefault();
+                var x = evt.pageX - elm.offsetLeft;
+                var y = evt.pageY - elm.offsetTop;
+
+                if (!menuElement) {
+                    createMenuElement();
+                    bindBodyClick();
+                } else if (evt.button === 2) {
+                    setMenuPosition(x, y);
+                } else {
+                    destroy();
+                    return;
                 }
 
-                function clickHandler(evt) {
-                    var isRightClick = evt.button === 2;
-                    evt.preventDefault();
+                if (elm.style.position === "static")
+                    elm.style.position = "relative";
 
-                    if (!menuElement) {
-                        createMenuElement();
-                    } else {
-                        this.removeChild(menuElement);
-                        menuElement = null;
-                        return;
-                    }
+                setMenuPosition(x, y);
+                elm.appendChild(menuElement);
+            }
 
-                    if (!isRightClick)
-                        return;
-
-                    var x = evt.pageX - this.offsetLeft;
-                    var y = evt.pageY - this.offsetTop;
-
-                    // todo: check if element is not absolute / relative / fixed
-
-                    menuElement.style.left = x + "px";
-                    menuElement.style.top = y + "px";
-
-                    this.style.position = "relative";
-                    this.appendChild(menuElement);
-                }
+            function setMenuPosition(x, y) {
+                menuElement.style.left = x + "px";
+                menuElement.style.top = y + "px";
             }
         }
     }

@@ -5,6 +5,7 @@
     border: 1px solid black;
     margin-top: 50px;
     margin-left: 100px;
+    position: absolute;
 }
 
 .menu{
