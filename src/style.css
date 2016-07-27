@@ -1,0 +1,21 @@
+.mydDiv{
+    height: 100px;
+    width: 100px;
+    background: #ddf333;
+    border: 1px solid black;
+    margin-top: 50px;
+    margin-left: 100px;
+}
+
+.menu{
+    height: 200px;
+    width: 70px;
+    background: lightgray;
+    position: absolute;
+    z-index: 10;
+    box-shadow: -5px 8px 8px -4px lightgray;
+}
+
+.menu-off{
+    display: none;
+}

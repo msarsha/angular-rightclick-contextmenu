@@ -1,0 +1,14 @@
+{
+  "name": "right-click-menu",
+  "version": "0.0.1",
+  "description": "directive to add a right click menu on elemnts",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Matan Sar-Shalom",
+  "license": "ISC",
+  "dependencies": {
+    "angular": "^1.5.8"
+  }
+}
