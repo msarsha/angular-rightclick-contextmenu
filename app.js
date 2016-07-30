@@ -9,32 +9,46 @@
             self.items = [
                 {
                     name: 'item 1',
+                    data: 'the data !'
                 },
                 {
                     name: 'item 2',
+                    data: 'the data !'
                 },
                 {
                     name: 'item 3',
+                    data: 'the data !'
                 },
                 {
                     name: 'item 4',
+                    data: 'the data !'
                 },
             ]
 
             self.menuOptions = [
                 {
-                    label: 'save',
+                    label: 'Save',
                     onClick: menuSave
+                },
+                {
+                    label: 'Edit',
+                    onClick: menuEdit,
+                    disabled: function(dataContext){
+                       return dataContext.name === "item 2"; 
+                    }
                 },
                 {
                     divider: true
                 },
                 {
-                    label: 'remove',
+                    label: 'Remove',
                     onClick: menuRemove
                 },
                 {
-                    label: 'edit',
+                    divider: true
+                },
+                {
+                    label: 'Details',
                     onClick: menuEdit
                 }
             ]

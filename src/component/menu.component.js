@@ -11,17 +11,19 @@
             controller: function () {
                 var self = this;
 
-                this.$onInit = function () {
-                    console.log(this.menuOptions);
-                }
-
                 this.onClick = function ($event, opt) {
+                    if(self.isOptionDisabled(opt))
+                        return;
+                    
                     self.closeMenu();
-
                     opt.onClick({
                         option: opt,
                         dataContext: self.data
                     });
+                }
+
+                this.isOptionDisabled = function(opt){
+                    return opt.disabled && opt.disabled(self.data);
                 }
             }
         })
