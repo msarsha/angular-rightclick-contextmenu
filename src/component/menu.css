@@ -20,11 +20,13 @@
     padding-left: 15px;
     padding-bottom: 5px;
     padding-top: 5px;
+    transition: all 0.15s;
 }
 
 .sh_menu_container ul li.sh_menu_item:hover{
     cursor: pointer;
-    background: rgba(230,230,230,1);
+    background: #4b8bec;
+    color: white;
 }
 
 .sh_context_mask{
@@ -51,5 +53,6 @@
 
 .sh_menu_container ul li.sh_menu_disabled:hover{
     cursor: not-allowed;
+    color: #d0d0d0;
     background: #ececec;
 }
