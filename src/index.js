@@ -1,92 +1,51 @@
 (function () {
+    angular
+        .module('shContextMenu', [])
+        .directive('shContextMenu', function ($compile) {
+            return {
+                scope: {
+                    menuOptions: '='
+                },
+                bindToController: true,
+                controllerAs: '$ctrl',
+                controller: angular.noop,
+                link: function ($scope, element, attrs, ctrl) {
+                    var menuElement,
+                        maskElement;
+                    
+                    element.on('contextmenu', function (event) {
+                        var body = angular.element(document.body);
+                        menuElement = buildMenuElement();
+                        maskElement = buildMaskElement();
 
-    var module = angular.module('sarsha.rightclick', []);
-
-    module.directive('shRightClick', shRightClick);
-    module.directive('mouseMove', mouseMove);
-
-    function shRightClick() {
-        return function ($scope, $element, $attrs) {
-            var elm = $element[0];
-            var menuElement = null;
-
-            elm.addEventListener("contextmenu", clickHandler);
-
-            function createMenuElement() {
-                menuElement = document.createElement("div");
-                menuElement.classList.add('menu');
-            }
-
-            function bindBodyClick() {
-                document.body.addEventListener("mousedown", bodyClickHandler);
-            }
-
-            function bodyClickHandler(e) {
-                if (e.button !== 2 && menuElement)
-                    destroy();
-            };
-
-            function destroy() {
-                elm.removeChild(menuElement);
-                elm.classList.remove("menu-open");
-                menuElement = null;
-                document.body.removeEventListener("mousedown", bodyClickHandler);
-            }
-
-            function clickHandler(evt) {
-                evt.preventDefault();
-                var x = evt.pageX - elm.offsetLeft;
-                var y = evt.pageY - elm.offsetTop;
-
-                if (!menuElement) {
-                    createMenuElement();
-                    bindBodyClick();
-                } else if (evt.button === 2) {
-                    setMenuPosition(x, y);
-                } else {
-                    destroy();
-                    return;
-                }
-
-                if (elm.style.position === "static" || elm.style.position == "")
-                    elm.style.position = "relative";
-
-                setMenuPosition(x, y);
-                elm.appendChild(menuElement);
-                elm.classList.add ("menu-open");
-            }
-
-            function setMenuPosition(x, y) {
-                menuElement.style.left = x + "px";
-                menuElement.style.top = y + "px";
-            }
-        }
-    }
-
-
-
-    function mouseMove() {
-        return {
-            template: "<div><span>{{$ctrl.mx}}</span></div><div><span>{{$ctrl.my}}</span></div>",
-            scope: {},
-            controller: function ($scope) {
-                var self = this;
-                this.mx = 0;
-                this.my = 0;
-
-                this.update = function (x, y) {
-                    $scope.$apply(function () {
-                        self.mx = x;
-                        self.my = y;
+                        setMenuPosition(menuElement, event);
+                        
+                        body.append(menuElement);
+                        body.append(maskElement);
                     });
+
+                    function setMenuPosition(element, event){
+                        var targetElement = angular.element(event.target);
+                    }
+
+                    function buildMenuElement() {
+                        var $elm = angular.element('<context-menu menu-options="$ctrl.menuOptions"></context-menu>');
+                        var linkFun = $compile($elm);
+                        var content = linkFun($scope);
+
+                        return content;
+                    }
+
+                    function buildMaskElement() {
+                        var $elm = angular.element('<div class="sh_context_mask"></div>');
+                        $elm.on('mousedown', function (e) {
+                            menuElement.remove();
+                            maskElement.remove();
+                        })
+
+                        return $elm;
+                    }
                 }
-            },
-            controllerAs: '$ctrl',
-            link: function ($scope, $element, $attrs) {
-                document.addEventListener('mousemove', function (evt) {
-                    $scope.$ctrl.update(evt.pageX, evt.pageY)
-                })
             }
-        }
-    }
+        });
 })();

@@ -4,16 +4,22 @@
 <head>
     <title></title>
     <meta charset="UTF-8">
-    <link href="src/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="src/component/menu.css">
+    <link rel="stylesheet" href="app.css">
 </head>
-<body ng-app="sarsha.rightclick">
-    <div class="mydDiv" sh-right-click></div>
-    <div class="mydDiv" sh-right-click></div>
-    <div class="mydDiv" sh-right-click></div>
+<body ng-app="app" ng-controller="appCtrl as app">
+    
+    <div ng-repeat="item in app.items">
+        <div class="box" sh-context-menu menu-options="app.menuOptions">
+            <span>{{item.name}}</span>
+        </div>
+    </div>
 
-    <mouse-move></mouse-move>
+
 
     <script src="node_modules/angular/angular.js"></script>
+    <script src="app.js"></script>
     <script src="src/index.js"></script>
+    <script src="src/component/menu.component.js"></script>
 </body>
 </html>

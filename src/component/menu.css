@@ -1,0 +1,16 @@
+.sh_menu_container{
+    position: fixed;
+    height: 80px;
+    width: 100px;
+    background: pink;
+    z-index: 90001;
+}
+
+.sh_context_mask{
+    position: fixed;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 90000;
+}
