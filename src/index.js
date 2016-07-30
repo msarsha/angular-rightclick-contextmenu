@@ -4,7 +4,8 @@
         .directive('shContextMenu', function ($compile) {
             return {
                 scope: {
-                    menuOptions: '='
+                    menuOptions: '<',
+                    contextData: '<'
                 },
                 bindToController: true,
                 controllerAs: '$ctrl',
@@ -14,6 +15,7 @@
                         maskElement;
                     
                     element.on('contextmenu', function (event) {
+                        event.preventDefault();
                         var body = angular.element(document.body);
                         menuElement = buildMenuElement();
                         maskElement = buildMaskElement();
@@ -29,7 +31,7 @@
                     }
 
                     function buildMenuElement() {
-                        var $elm = angular.element('<context-menu menu-options="$ctrl.menuOptions"></context-menu>');
+                        var $elm = angular.element('<context-menu menu-options="$ctrl.menuOptions" data="$ctrl.contextData"></context-menu>');
                         var linkFun = $compile($elm);
                         var content = linkFun($scope);
 

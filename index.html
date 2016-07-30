@@ -10,7 +10,7 @@
 <body ng-app="app" ng-controller="appCtrl as app">
     
     <div ng-repeat="item in app.items">
-        <div class="box" sh-context-menu menu-options="app.menuOptions">
+        <div class="box" sh-context-menu menu-options="app.menuOptions" context-data="item">
             <span>{{item.name}}</span>
         </div>
     </div>
