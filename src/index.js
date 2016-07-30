@@ -14,10 +14,14 @@
                     var menuElement,
                         maskElement;
 
+                    ctrl.destroyElements = function () {
+                        destroyElements();
+                    }
+
                     element.on('contextmenu', function (event) {
                         event.preventDefault();
                         var body = angular.element(document.body);
-                        
+
                         menuElement = buildMenuElement();
                         maskElement = buildMaskElement();
 
@@ -33,7 +37,7 @@
                     }
 
                     function buildMenuElement() {
-                        var $elm = angular.element('<context-menu menu-options="$ctrl.menuOptions" data="$ctrl.contextData" class="sh_menu_container"></context-menu>');
+                        var $elm = angular.element('<context-menu close-menu="$ctrl.destroyElements()" menu-options="$ctrl.menuOptions" data="$ctrl.contextData" class="sh_menu_container"></context-menu>');
                         var linkFun = $compile($elm);
                         var content = linkFun($scope);
 
@@ -43,11 +47,15 @@
                     function buildMaskElement() {
                         var $elm = angular.element('<div class="sh_context_mask"></div>');
                         $elm.on('mousedown', function (e) {
-                            menuElement.remove();
-                            maskElement.remove();
+                            destroyElements();
                         })
 
                         return $elm;
+                    }
+
+                    function destroyElements() {
+                        menuElement.remove();
+                        maskElement.remove();
                     }
                 }
             }

@@ -4,7 +4,8 @@
         .component('contextMenu', {
             bindings: {
                 menuOptions: '<',
-                data: '<'
+                data: '<',
+                closeMenu: '&'
             },
             templateUrl: 'src/component/menu.html',
             controller: function () {
@@ -15,6 +16,8 @@
                 }
 
                 this.onClick = function ($event, opt) {
+                    self.closeMenu();
+
                     opt.onClick({
                         option: opt,
                         dataContext: self.data
