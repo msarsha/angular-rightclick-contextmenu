@@ -27,6 +27,9 @@
                     onClick: menuSave
                 },
                 {
+                    divider: true
+                },
+                {
                     label: 'remove',
                     onClick: menuRemove
                 },

@@ -20,10 +20,10 @@
     padding-left: 15px;
     padding-bottom: 5px;
     padding-top: 5px;
-    cursor: pointer;
 }
 
-.sh_menu_container ul li:hover{
+.sh_menu_container ul li.sh_menu_item:hover{
+    cursor: pointer;
     background: rgba(230,230,230,1);
 }
 
@@ -34,4 +34,13 @@
     left: 0;
     right: 0;
     z-index: 90000;
+}
+
+.sh_menu_divider{
+    height: 1px;
+    margin: 1px 1px 8px 1px;
+    overflow: hidden;
+    background-color: #ececec;
+    border-bottom: 1px solid #d0d0d0;
+    line-height: 10px;
 }

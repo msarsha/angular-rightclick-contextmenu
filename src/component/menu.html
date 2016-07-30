@@ -1,6 +1,6 @@
-<ul class="sh_menu">
-    <li ng-repeat="option in $ctrl.menuOptions" class="sh_menu_item">
-        <div ng-click="$ctrl.onClick($event, option)">
+<ul>
+    <li ng-repeat="option in $ctrl.menuOptions" ng-class="{sh_menu_item: !option.divider, sh_menu_divider: option.divider}">
+        <div ng-click="$ctrl.onClick($event, option)" ng-if="!option.divider">
             {{option.label}}
         </div>
     </li>
