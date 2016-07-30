@@ -13,25 +13,27 @@
                 link: function ($scope, element, attrs, ctrl) {
                     var menuElement,
                         maskElement;
-                    
+
                     element.on('contextmenu', function (event) {
                         event.preventDefault();
                         var body = angular.element(document.body);
+                        
                         menuElement = buildMenuElement();
                         maskElement = buildMaskElement();
 
                         setMenuPosition(menuElement, event);
-                        
+
                         body.append(menuElement);
                         body.append(maskElement);
                     });
 
-                    function setMenuPosition(element, event){
-                        var targetElement = angular.element(event.target);
+                    function setMenuPosition(menuElement, event) {
+                        menuElement[0].style.top = event.clientY + "px";
+                        menuElement[0].style.left = event.clientX + "px";
                     }
 
                     function buildMenuElement() {
-                        var $elm = angular.element('<context-menu menu-options="$ctrl.menuOptions" data="$ctrl.contextData"></context-menu>');
+                        var $elm = angular.element('<context-menu menu-options="$ctrl.menuOptions" data="$ctrl.contextData" class="sh_menu_container"></context-menu>');
                         var linkFun = $compile($elm);
                         var content = linkFun($scope);
 

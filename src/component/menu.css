@@ -1,9 +1,29 @@
 .sh_menu_container{
     position: fixed;
-    height: 80px;
-    width: 100px;
-    background: pink;
+    height: auto;
+    background: #ececec;
     z-index: 90001;
+    min-width: 150px;
+    border: 0.5px solid rgba(0,0,0,0.2);
+    border-radius: 2.5px;
+    box-shadow: 5px 4px 8px rgba(0,0,0,0.1);
+}
+
+.sh_menu_container ul{
+    list-style: none;
+    padding: 5px 0;
+    margin: 0;
+}
+
+.sh_menu_container ul li{
+    padding-right: 10px;
+    padding-left: 15px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+
+.sh_menu_container ul li:hover{
+    background: rgba(230,230,230,1);
 }
 
 .sh_context_mask{

@@ -1,9 +1,7 @@
-<div class="sh_menu_container">
-    <ul class="sh_menu">
-        <li ng-repeat="option in $ctrl.menuOptions" class="sh_menu_item">
-            <div ng-click="$ctrl.onClick($event, option)">
-                {{option.label}}
-            </div>
-        </li>
-    </ul>
-</div>
+<ul class="sh_menu">
+    <li ng-repeat="option in $ctrl.menuOptions" class="sh_menu_item">
+        <div ng-click="$ctrl.onClick($event, option)">
+            {{option.label}}
+        </div>
+    </li>
+</ul>
