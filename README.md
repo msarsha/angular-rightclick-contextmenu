@@ -1,6 +1,9 @@
 # angular-rightclick-contextmenu
 
-_Right click context menu for angular 1.5 - https://sarsha17.github.io/angular-right-click/_
+_Right click context menu for angular 1.5_
+
+
+__DEMO:__ https://sarsha17.github.io/angular-right-click/
 
 ### Build
 To build close the repo and run:    `gulp`
