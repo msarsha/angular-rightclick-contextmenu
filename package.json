@@ -1,14 +1,23 @@
 {
   "name": "right-click-menu",
-  "version": "0.0.1",
-  "description": "directive to add a right click menu on elemnts",
-  "main": "index.js",
+  "version": "0.0.2",
+  "description": "",
+  "main": "gulpfile.js",
+  "directories": {
+    "example": "example"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Matan Sar-Shalom",
+  "author": "",
   "license": "ISC",
-  "dependencies": {
-    "angular": "^1.5.8"
+  "devDependencies": {
+    "browserify": "^13.1.0",
+    "browserify-css": "^0.9.1",
+    "gulp": "^3.9.1",
+    "gulp-angular-templatecache": "^2.0.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-uglify": "^1.5.4",
+    "vinyl-source-stream": "^1.1.0"
   }
 }

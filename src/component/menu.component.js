@@ -1,30 +1,28 @@
-(function () {
-    angular
-        .module('shContextMenu')
-        .component('contextMenu', {
-            bindings: {
-                menuOptions: '<',
-                data: '<',
-                closeMenu: '&'
-            },
-            templateUrl: 'src/component/menu.html',
-            controller: function () {
-                var self = this;
+angular
+    .module('contextMenu', [])
+    .component('contextMenu', {
+        bindings: {
+            menuOptions: '<',
+            data: '<',
+            closeMenu: '&'
+        },
+        templateUrl: 'src/component/menu.html',
+        controller: function () {
+            var self = this;
 
-                this.onClick = function ($event, opt) {
-                    if(self.isOptionDisabled(opt))
-                        return;
-                    
-                    self.closeMenu();
-                    opt.onClick({
-                        option: opt,
-                        dataContext: self.data
-                    });
-                }
+            this.onClick = function ($event, opt) {
+                if (self.isOptionDisabled(opt))
+                    return;
 
-                this.isOptionDisabled = function(opt){
-                    return opt.disabled && opt.disabled(self.data);
-                }
+                self.closeMenu();
+                opt.onClick({
+                    option: opt,
+                    dataContext: self.data
+                });
             }
-        })
-})();
+
+            this.isOptionDisabled = function (opt) {
+                return opt.disabled && opt.disabled(self.data);
+            }
+        }
+    })
