@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Angular-rightclick-contextmenu by sarsha17</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Angular-rightclick-contextmenu</h1>
+      <h2 class="project-tagline">Right click context menu for angular 1.5</h2>
+      <a href="https://github.com/sarsha17/angular-rightclick-contextmenu" class="btn">View on GitHub</a>
+      <a href="https://github.com/sarsha17/angular-rightclick-contextmenu/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/sarsha17/angular-rightclick-contextmenu/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="angular-rightclick-contextmenu" class="anchor" href="#angular-rightclick-contextmenu" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>angular-rightclick-contextmenu</h1>
+
+<p>Right click context menu for angular 1.5.</p>
+
+<h3>
+<a id="build" class="anchor" href="#build" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Build</h3>
+
+<p>To build close the repo and run:    <code>gulp</code></p>
+
+<h3>
+<a id="how-to-use" class="anchor" href="#how-to-use" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to use:</h3>
+
+<ul>
+<li>Add the <code>sh-context-menu</code> directive to the element you wish to enable the context menu functionality.</li>
+<li>Provide a options array that will contain the context menu objects using the <code>menu-options</code> binding.</li>
+<li>Provide a data context object using the <code>context-data</code> binding.</li>
+</ul>
+
+<h3>
+<a id="menu-options" class="anchor" href="#menu-options" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>menu-options</code>
+</h3>
+
+<p><code>menu-options</code> should be an Array with the following structure:</p>
+
+<div class="highlight highlight-source-js"><pre>[
+    {
+        label<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>Save<span class="pl-pds">'</span></span>,        <span class="pl-c">// menu option label</span>
+        <span class="pl-en">onClick</span><span class="pl-k">:</span> <span class="pl-k">function</span>(<span class="pl-smi">$event</span>){  <span class="pl-c">// on click handler</span>
+        }   
+    },
+    {
+        label<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>Edit<span class="pl-pds">'</span></span>,
+        onClick<span class="pl-k">:</span> menuEdit,
+        <span class="pl-en">disabled</span><span class="pl-k">:</span> <span class="pl-k">function</span> (<span class="pl-smi">dataContext</span>) { <span class="pl-c">// disabled handler</span>
+            <span class="pl-k">return</span> <span class="pl-c1">true</span>;
+        }
+      },
+      {
+        label<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>Details<span class="pl-pds">'</span></span>,
+        <span class="pl-en">onClick</span><span class="pl-k">:</span> <span class="pl-k">function</span>(<span class="pl-smi">$event</span>){  <span class="pl-c">// on click handler</span>
+        }   
+      },
+      {
+        divider<span class="pl-k">:</span> <span class="pl-c1">true</span>       <span class="pl-c">// will render a divider</span>
+      },
+      {
+        label<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>Remove<span class="pl-pds">'</span></span>,
+        <span class="pl-en">onClick</span><span class="pl-k">:</span> <span class="pl-k">function</span>(<span class="pl-smi">$event</span>){  <span class="pl-c">// on click handler</span>
+        }   
+      }
+  ]</pre></div>
+
+<h4>
+<a id="the-onclick-handler" class="anchor" href="#the-onclick-handler" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>The <code>onClick</code> handler</h4>
+
+<p>The <code>onClick</code> handler is a function with <code>$event</code> parameter.</p>
+
+<p>The <code>$event</code> object will contain the following parameters:</p>
+
+<ul>
+<li>
+<code>option</code> object that contain the option the user pressed</li>
+<li>
+<code>dataContext</code> object that was injected using the <code>context-data</code> binding</li>
+</ul>
+
+<h4>
+<a id="the-disabled-handler" class="anchor" href="#the-disabled-handler" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>The <code>disabled</code> handler</h4>
+
+<p>The <code>disabled</code> handler is a function with <code>dataContext</code> parameter.</p>
+
+<p>This handler will be injected with the dataContext provided using the <code>context-data</code> binding
+and will return true/false to disable the current menu option for the current dataContext</p>
+
+<h3>
+<a id="context-data" class="anchor" href="#context-data" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><code>context-data</code>
+</h3>
+
+<p>The <code>context-data</code> object will be injected into the <code>onClick</code> and <code>disabled</code> handlers.</p>
+
+<h3>
+<a id="examples" class="anchor" href="#examples" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Examples:</h3>
+
+<p>Example can be found under <code>example/</code></p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/sarsha17/angular-rightclick-contextmenu">Angular-rightclick-contextmenu</a> is maintained by <a href="https://github.com/sarsha17">sarsha17</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
