@@ -32,7 +32,8 @@ Clone the repo and run `npm install` to install dependencies and then `gulp` to 
     },
     {
         label: 'Edit',
-        onClick: menuEdit,
+        onClick: function($event){  // on click handler
+        },
         disabled: function (dataContext) { // disabled handler
             return true;
         }
