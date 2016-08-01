@@ -6,7 +6,7 @@ _Right click context menu for angular 1.5_
 __DEMO:__ https://sarsha17.github.io/angular-right-click/
 
 ### Build
-To build close the repo and run:    `gulp`
+Clone the repo and run `npm install` to install dependencies and then `gulp` to build;
 
 
 ### How to use:
