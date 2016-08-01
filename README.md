@@ -15,6 +15,10 @@ Clone the repo and run `npm install` to install dependencies and then `gulp` to 
 * Provide a options array that will contain the context menu objects using the `menu-options` binding.
 * Provide a data context object using the `context-data` binding.
 
+````html
+<div sh-context-menu menu-options="ctrl.menuOptions" context-data="ctrl.data">Right Click Me</div>
+````
+
 ### `menu-options` 
 
 `menu-options` should be an Array with the following structure:
@@ -76,3 +80,4 @@ The `context-data` object will be injected into the `onClick` and `disabled` han
 ### Examples:
 
 Example can be found under `example/`
+And live demo here: https://sarsha17.github.io/angular-right-click/
