@@ -80,4 +80,6 @@ The `context-data` object will be injected into the `onClick` and `disabled` han
 ### Examples:
 
 Example can be found under `example/`
+
+
 And live demo here: https://sarsha17.github.io/angular-right-click/
