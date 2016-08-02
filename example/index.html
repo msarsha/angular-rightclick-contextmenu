@@ -4,7 +4,6 @@
 <head>
     <title></title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="app.css">
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
         crossorigin="anonymous">
@@ -12,7 +11,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
         crossorigin="anonymous"></script>
 
-    <script src="../node_modules/angular/angular.js"></script>
+    <link rel="stylesheet" href="app.css">
+    <script src="../node_modules/angular/angular.min.js"></script>
     <script src="../dist/sarsha.contextmenu.js"></script>
     <script src="app.js"></script>
 </head>
@@ -21,13 +21,13 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>Name</th>
-                <th>Data</th>
+                <th>Name (Right Click name fields)</th>
+                <th>Data (Right Click data fields)</th>
             </tr>
         </thead>
         <tbody>
             <tr ng-repeat="item in app.items">
-                <td>{{item.name}}</td>
+                <td sh-context-menu menu-options="app.anotherMenuOptions" context-data="item">{{item.name}}</td>
                 <td sh-context-menu menu-options="app.menuOptions" context-data="item">{{item.data}}</td>
             </tr>
         </tbody>

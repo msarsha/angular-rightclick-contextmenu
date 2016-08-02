@@ -1,4 +1,4 @@
-var comp = require('./component/menu.component.js');
+require('./component/menu.component.js');
 require('./component/menu.css');
 
 angular

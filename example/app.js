@@ -23,11 +23,12 @@ angular
                 data: 'the data !'
             },
         ]
-
-        self.menuOptions = [
+        
+        self.menuOptions = 
+        [
             {
-                label: 'Save',
-                onClick: menuSave
+                label: 'Save',      // menu option label
+                onClick: menuSave   // on click handler
             },
             {
                 label: 'Edit',
@@ -41,11 +42,22 @@ angular
                 onClick: menuEdit
             },
             {
-                divider: true
+                divider: true       // will render a divider
             },
             {
                 label: 'Remove',
                 onClick: menuRemove
+            }
+        ]
+        
+        self.anotherMenuOptions = 
+        [
+            {
+                label: 'Different Menu',      // menu option label
+                onClick: menuSave,   // on click handler
+                disabled: function(dataContext){
+                    return dataContext.name === "item 4";
+                }
             }
         ]
 

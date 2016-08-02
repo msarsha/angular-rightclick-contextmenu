@@ -13,7 +13,7 @@ gulp.task('browserify', function () {
         transform: [css]
     });
     return b.bundle()
-        .on('error', function(e){
+        .on('error', function (e) {
             console.log(e);
         })
         .pipe(source('bundle.js'))
@@ -28,7 +28,7 @@ gulp.task('build-js', ['browserify', 'templatecache'], function () {
         .pipe(gulp.dest('./dist/'));
 })
 
-gulp.task('default', ['build-js'], function(){
+gulp.task('default', ['build-js'], function () {
     return gulp
         .src(['./dist/bundle.js', './dist/templates.js'])
         .pipe(clean())
@@ -43,4 +43,13 @@ gulp.task('templatecache', function () {
             root: 'src/'
         }))
         .pipe(gulp.dest('dist/'));
-});;
+});
+
+gulp.task('watch', function () {
+    var watcher = gulp
+        .watch(['src/**/*.js', 'src/**/*.html', 'src/**/*.css'], ['build-js']);
+
+    watcher.on('change', function(event){
+        console.log(event);
+    })
+})
