@@ -3,7 +3,7 @@
 _Right click context menu for angular 1.5_
 
 
-__DEMO:__ https://sarsha17.github.io/angular-right-click/
+__DEMO:__ https://msarsha.github.io/angular-right-click/
 
 ### Build
 Clone the repo and run `npm install` to install dependencies and then `gulp` to build;
@@ -83,4 +83,4 @@ The `context-data` object will be injected into the `onClick` and `disabled` han
 Example can be found under `example/`
 
 
-And live demo here: https://sarsha17.github.io/angular-right-click/
+And live demo here: https://msarsha.github.io/angular-right-click/
