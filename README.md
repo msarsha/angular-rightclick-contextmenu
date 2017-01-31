@@ -15,10 +15,19 @@ Clone the repo and run `npm install` to install dependencies and then `gulp` to 
 * Add the `sh-context-menu` directive to the element you wish to enable the context menu functionality.
 * Provide a options array that will contain the context menu objects using the `menu-options` binding.
 * Provide a data context object using the `context-data` binding.
+* Optionally provide a options object
 
 ````html
-<div sh-context-menu menu-options="ctrl.menuOptions" context-data="ctrl.data">Right Click Me</div>
+<div sh-context-menu menu-options="ctrl.menuOptions" context-data="ctrl.data" options="ctrl.options">Right Click Me</div>
 ````
+
+### `options`
+`options` should be a key\value object
+
+Supported options:
+
+rtl: Right to left support
+
 
 ### `menu-options` 
 
