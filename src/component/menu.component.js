@@ -4,7 +4,8 @@ angular
         bindings: {
             menuOptions: '<',
             data: '<',
-            closeMenu: '&'
+            closeMenu: '&',
+            options: '<'
         },
         templateUrl: 'src/component/menu.html',
         controller: function () {

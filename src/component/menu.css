@@ -15,6 +15,10 @@
     margin: 0;
 }
 
+.sh_menu_container ul.sh_menu_rtl{
+    direction: rtl;
+}
+
 .sh_menu_container ul li{
     padding-right: 10px;
     padding-left: 15px;
@@ -56,3 +60,4 @@
     color: #d0d0d0;
     background: #ececec;
 }
+

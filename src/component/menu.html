@@ -1,5 +1,5 @@
-<ul>
-    <li ng-repeat="option in $ctrl.menuOptions" ng-class="{sh_menu_item: !option.divider, sh_menu_divider: option.divider, sh_menu_disabled: $ctrl.isOptionDisabled(option)}">
+<ul ng-class="{sh_menu_rtl: $ctrl.options.rtl}">
+    <li ng-style="" ng-repeat="option in $ctrl.menuOptions" ng-class="{sh_menu_item: !option.divider, sh_menu_divider: option.divider, sh_menu_disabled: $ctrl.isOptionDisabled(option)}">
         <div ng-click="$ctrl.onClick($event, option)" ng-if="!option.divider">
             {{option.label}}
         </div>

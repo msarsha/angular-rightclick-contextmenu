@@ -12,7 +12,8 @@ angular
         return {
             scope: {
                 menuOptions: '<',
-                contextData: '<'
+                contextData: '<',
+                options: '<'
             },
             bindToController: true,
             controllerAs: '$ctrl',
@@ -21,9 +22,15 @@ angular
                 var menuElement,
                     maskElement;
 
+                var defaultOptions = {
+                    rtl: false
+                }
+
                 ctrl.destroyElements = function () {
                     destroyElements();
                 }
+
+                ctrl.options = ctrl.options || defaultOptions;
 
                 element.on('contextmenu', function (event) {
                     event.preventDefault();
@@ -32,19 +39,25 @@ angular
                     menuElement = buildMenuElement();
                     maskElement = buildMaskElement();
 
-                    setMenuPosition(menuElement, event);
-
                     body.append(menuElement);
                     body.append(maskElement);
+
+                    setMenuPosition(menuElement, event, ctrl.options);
                 });
 
-                function setMenuPosition(menuElement, event) {
+                function setMenuPosition(menuElement, event, options) {
+                    var elmWidth = menuElement[0].offsetWidth;
+                    var clientX = event.clientX;
+
+                    if(options.rtl)
+                        clientX = clientX - elmWidth;
+
                     menuElement[0].style.top = event.clientY + "px";
-                    menuElement[0].style.left = event.clientX + "px";
+                    menuElement[0].style.left = clientX + "px";
                 }
 
                 function buildMenuElement() {
-                    var $elm = angular.element('<context-menu close-menu="$ctrl.destroyElements()" menu-options="$ctrl.menuOptions" data="$ctrl.contextData" class="sh_menu_container"></context-menu>');
+                    var $elm = angular.element('<context-menu options="$ctrl.options" close-menu="$ctrl.destroyElements()" menu-options="$ctrl.menuOptions" data="$ctrl.contextData" class="sh_menu_container"></context-menu>');
                     var linkFun = $compile($elm);
                     var content = linkFun($scope);
 

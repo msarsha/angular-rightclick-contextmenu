@@ -20,11 +20,16 @@ gulp.task('browserify', function () {
         .pipe(gulp.dest('./dist/'))
 });
 
-gulp.task('build-js', ['browserify', 'templatecache'], function () {
+gulp.task('clean', function(){
+    return gulp.src('dist/sarsha.contextmenu.js')
+        .pipe(clean());    
+})
+
+gulp.task('build-js', ['clean', 'browserify', 'templatecache'], function () {
     return gulp
         .src('./dist/*.js')
         .pipe(concat('sarsha.contextmenu.js'))
-        .pipe(uglify())
+        // .pipe(uglify())
         .pipe(gulp.dest('./dist/'));
 })
 

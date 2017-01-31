@@ -2,6 +2,31 @@
 'use strict';
 // For more information about browser field, check out the browser field at https://github.com/substack/browserify-handbook#browser-field.
 
+var styleElementsInsertedAtTop = [];
+
+var insertStyleElement = function(styleElement, options) {
+    var head = document.head || document.getElementsByTagName('head')[0];
+    var lastStyleElementInsertedAtTop = styleElementsInsertedAtTop[styleElementsInsertedAtTop.length - 1];
+
+    options = options || {};
+    options.insertAt = options.insertAt || 'bottom';
+
+    if (options.insertAt === 'top') {
+        if (!lastStyleElementInsertedAtTop) {
+            head.insertBefore(styleElement, head.firstChild);
+        } else if (lastStyleElementInsertedAtTop.nextSibling) {
+            head.insertBefore(styleElement, lastStyleElementInsertedAtTop.nextSibling);
+        } else {
+            head.appendChild(styleElement);
+        }
+        styleElementsInsertedAtTop.push(styleElement);
+    } else if (options.insertAt === 'bottom') {
+        head.appendChild(styleElement);
+    } else {
+        throw new Error('Invalid value for parameter \'insertAt\'. Must be \'top\' or \'bottom\'.');
+    }
+};
+
 module.exports = {
     // Create a <link> tag with optional data attributes
     createLink: function(href, attributes) {
@@ -22,10 +47,10 @@ module.exports = {
         head.appendChild(link);
     },
     // Create a <style> tag with optional data attributes
-    createStyle: function(cssText, attributes) {
-        var head = document.head || document.getElementsByTagName('head')[0],
-            style = document.createElement('style');
+    createStyle: function(cssText, attributes, extraOptions) {
+        extraOptions = extraOptions || {};
 
+        var style = document.createElement('style');
         style.type = 'text/css';
 
         for (var key in attributes) {
@@ -35,17 +60,17 @@ module.exports = {
             var value = attributes[key];
             style.setAttribute('data-' + key, value);
         }
-        
+
         if (style.sheet) { // for jsdom and IE9+
             style.innerHTML = cssText;
             style.sheet.cssText = cssText;
-            head.appendChild(style);
+            insertStyleElement(style, { insertAt: extraOptions.insertAt });
         } else if (style.styleSheet) { // for IE8 and below
-            head.appendChild(style);
+            insertStyleElement(style, { insertAt: extraOptions.insertAt });
             style.styleSheet.cssText = cssText;
         } else { // for Chrome, Firefox, and Safari
             style.appendChild(document.createTextNode(cssText));
-            head.appendChild(style);
+            insertStyleElement(style, { insertAt: extraOptions.insertAt });
         }
     }
 };
@@ -57,7 +82,8 @@ angular
         bindings: {
             menuOptions: '<',
             data: '<',
-            closeMenu: '&'
+            closeMenu: '&',
+            options: '<'
         },
         templateUrl: 'src/component/menu.html',
         controller: function () {
@@ -80,7 +106,7 @@ angular
         }
     })
 },{}],3:[function(require,module,exports){
-var css = ".sh_menu_container {\n  position: fixed;\n  height: auto;\n  background: #ececec;\n  z-index: 90001;\n  min-width: 150px;\n  border: 0.5px solid rgba(0,0,0,0.2);\n  border-radius: 2.5px;\n  box-shadow: 0px 0px 10px 2px rgba(0,0,0,0.1);\n}\n.sh_menu_container ul {\n  list-style: none;\n  padding: 5px 0;\n  margin: 0;\n}\n.sh_menu_container ul li {\n  padding-right: 10px;\n  padding-left: 15px;\n  padding-bottom: 5px;\n  padding-top: 5px;\n  transition: all 0.15s;\n}\n.sh_menu_container ul li.sh_menu_item:hover {\n  cursor: pointer;\n  background: #4b8bec;\n  color: white;\n}\n.sh_context_mask {\n  position: fixed;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  z-index: 90000;\n}\n.sh_menu_divider {\n  height: 1px;\n  margin: 1px 1px 8px 1px;\n  overflow: hidden;\n  background-color: #ececec;\n  border-bottom: 1px solid #d0d0d0;\n  line-height: 10px;\n}\n.sh_menu_container ul li.sh_menu_disabled {\n  color: #d0d0d0;\n}\n.sh_menu_container ul li.sh_menu_disabled:hover {\n  cursor: not-allowed;\n  color: #d0d0d0;\n  background: #ececec;\n}\n"; (require("browserify-css").createStyle(css, { "href": "src/component/menu.css"})); module.exports = css;
+var css = ".sh_menu_container {\n  position: fixed;\n  height: auto;\n  background: #ececec;\n  z-index: 90001;\n  min-width: 150px;\n  border: 0.5px solid rgba(0,0,0,0.2);\n  border-radius: 2.5px;\n  box-shadow: 0px 0px 10px 2px rgba(0,0,0,0.1);\n}\n.sh_menu_container ul {\n  list-style: none;\n  padding: 5px 0;\n  margin: 0;\n}\n.sh_menu_container ul.sh_menu_rtl {\n  direction: rtl;\n}\n.sh_menu_container ul li {\n  padding-right: 10px;\n  padding-left: 15px;\n  padding-bottom: 5px;\n  padding-top: 5px;\n  transition: all 0.15s;\n}\n.sh_menu_container ul li.sh_menu_item:hover {\n  cursor: pointer;\n  background: #4b8bec;\n  color: white;\n}\n.sh_context_mask {\n  position: fixed;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  z-index: 90000;\n}\n.sh_menu_divider {\n  height: 1px;\n  margin: 1px 1px 8px 1px;\n  overflow: hidden;\n  background-color: #ececec;\n  border-bottom: 1px solid #d0d0d0;\n  line-height: 10px;\n}\n.sh_menu_container ul li.sh_menu_disabled {\n  color: #d0d0d0;\n}\n.sh_menu_container ul li.sh_menu_disabled:hover {\n  cursor: not-allowed;\n  color: #d0d0d0;\n  background: #ececec;\n}\n"; (require("browserify-css").createStyle(css, { "href": "src/component/menu.css" }, { "insertAt": "bottom" })); module.exports = css;
 },{"browserify-css":1}],4:[function(require,module,exports){
 require('./component/menu.component.js');
 require('./component/menu.css');
@@ -96,7 +122,8 @@ angular
         return {
             scope: {
                 menuOptions: '<',
-                contextData: '<'
+                contextData: '<',
+                options: '<'
             },
             bindToController: true,
             controllerAs: '$ctrl',
@@ -105,9 +132,15 @@ angular
                 var menuElement,
                     maskElement;
 
+                var defaultOptions = {
+                    rtl: false
+                }
+
                 ctrl.destroyElements = function () {
                     destroyElements();
                 }
+
+                ctrl.options = ctrl.options || defaultOptions;
 
                 element.on('contextmenu', function (event) {
                     event.preventDefault();
@@ -116,19 +149,25 @@ angular
                     menuElement = buildMenuElement();
                     maskElement = buildMaskElement();
 
-                    setMenuPosition(menuElement, event);
-
                     body.append(menuElement);
                     body.append(maskElement);
+
+                    setMenuPosition(menuElement, event, ctrl.options);
                 });
 
-                function setMenuPosition(menuElement, event) {
+                function setMenuPosition(menuElement, event, options) {
+                    var elmWidth = menuElement[0].offsetWidth;
+                    var clientX = event.clientX;
+
+                    if(options.rtl)
+                        clientX = clientX - elmWidth;
+
                     menuElement[0].style.top = event.clientY + "px";
-                    menuElement[0].style.left = event.clientX + "px";
+                    menuElement[0].style.left = clientX + "px";
                 }
 
                 function buildMenuElement() {
-                    var $elm = angular.element('<context-menu close-menu="$ctrl.destroyElements()" menu-options="$ctrl.menuOptions" data="$ctrl.contextData" class="sh_menu_container"></context-menu>');
+                    var $elm = angular.element('<context-menu options="$ctrl.options" close-menu="$ctrl.destroyElements()" menu-options="$ctrl.menuOptions" data="$ctrl.contextData" class="sh_menu_container"></context-menu>');
                     var linkFun = $compile($elm);
                     var content = linkFun($scope);
 
