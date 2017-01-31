@@ -29,7 +29,7 @@ gulp.task('build-js', ['clean', 'browserify', 'templatecache'], function () {
     return gulp
         .src('./dist/*.js')
         .pipe(concat('sarsha.contextmenu.js'))
-        // .pipe(uglify())
+        .pipe(uglify())
         .pipe(gulp.dest('./dist/'));
 })
 
