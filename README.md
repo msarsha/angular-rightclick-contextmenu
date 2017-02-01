@@ -26,7 +26,7 @@ Clone the repo and run `npm install` to install dependencies and then `gulp` to 
 
 Supported options:
 
-rtl: Right to left support
+`rtl`: Right to left support
 
 
 ### `menu-options` 
