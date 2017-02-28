@@ -1,3 +1,4 @@
 /node_modules
 /.vscode
 /old
+.DS_Store

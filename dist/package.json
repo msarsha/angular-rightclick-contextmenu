@@ -1,6 +1,6 @@
 {
   "name": "right-click-menu",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Right click context menu for AngularJS",
   "main": "sarsha.contextmenu.js",
   "directories": {
