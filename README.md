@@ -25,7 +25,7 @@ Clone the repo and run `npm install` to install dependencies and then `gulp` to 
 <div sh-context-menu menu-options="ctrl.menuOptions" context-data="ctrl.data" options="ctrl.options">Right Click Me</div>
 ````
 
-### `options`
+### `options` (v0.0.4)
 `options` should be a key\value object
 
 Supported options:
